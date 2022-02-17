@@ -1,0 +1,47 @@
+package com.example.nikestore.model.apiService
+
+import com.example.nikestore.model.dataclass.*
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
+
+interface ApiService {
+    @GET("product/list")
+    suspend fun getProduct(@Query("sort")sort:String):List<Product>
+
+    @GET("banner/slider")
+    suspend fun getBanners():List<Banner>
+
+    @GET("comment/list")
+    suspend fun getComments(@Query("product_id") productId: Int): List<Comment>
+
+    @POST("cart/add")
+    suspend fun addToCart(@Body jsonObject: JsonObject): AddToCartResponse
+
+    @POST("cart/remove")
+    suspend fun removeItemFromCart(@Body jsonObject: JsonObject): MessageResponse
+
+    @GET("cart/list")
+    suspend fun getCart(): CartResponse
+
+    @POST("cart/changeCount")
+    suspend fun changeCount(@Body jsonObject: JsonObject): AddToCartResponse
+
+    @GET("cart/count")
+    suspend fun getCartItemsCount():CartItemCount
+
+    @POST("auth/token")
+    suspend fun login(@Body jsonObject: JsonObject): TokenResponse
+
+    @POST("user/register")
+    suspend fun signUp(@Body jsonObject: JsonObject): MessageResponse
+
+    @POST("auth/token")
+    fun refreshToken(@Body jsonObject: JsonObject): Call<TokenResponse>
+
+
+
+}
