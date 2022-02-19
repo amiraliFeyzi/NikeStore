@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nikestore.R
 import com.example.nikestore.base.NikeActivity
 import com.example.nikestore.components.imageview.ImageLoading
 import com.example.nikestore.customview.scroll.ObservableScrollViewCallbacks
@@ -70,6 +71,7 @@ class ProductDetailActivity : NikeActivity() {
 
         binding.addToCartBtn.setOnClickListener {
             viewModel.onAddToCartBtn()
+            showSnackBar(getString(R.string.success_addToCart))
         }
 
         binding.backBtn.setOnClickListener {

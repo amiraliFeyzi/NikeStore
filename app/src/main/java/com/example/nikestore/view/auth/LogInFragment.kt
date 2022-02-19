@@ -1,5 +1,6 @@
 package com.example.nikestore.view.auth
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.nikestore.R
 import com.example.nikestore.databinding.FragmentLogInBinding
+import com.example.nikestore.view.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_log_in.*
 @AndroidEntryPoint
@@ -31,9 +33,16 @@ class LogInFragment : Fragment() {
 
         loginBtn.setOnClickListener {
             viewModel.login(binding.emailEt.text.toString() , binding.passwordEt.text.toString())
-            requireActivity().finish()
+
+            viewModel.finishWorkLiveData.observe(viewLifecycleOwner){
+                if (it){
+                    requireActivity().finish()
+                }
+            }
         }
-        //login()
+
+
+
         signUpLinkBtn.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction().apply {
                 replace(R.id.frame_auth, SignUpFragment())
@@ -42,11 +51,7 @@ class LogInFragment : Fragment() {
     }
 
 
-//    fun login(){
-//        loginBtn.setOnClickListener {
-//            viewModel.login(binding.emailEt.text.toString() , binding.passwordEt.text.toString())
-//        }
-//    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

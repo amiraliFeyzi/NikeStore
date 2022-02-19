@@ -31,8 +31,12 @@ class SignUpFragment : Fragment() {
             val email = binding.emailEt.text.toString()
             val password = binding.passwordEt.text.toString()
             viewModel.signUp(email  , password)
-            requireActivity().finish()
 
+            viewModel.finishWorkLiveData.observe(viewLifecycleOwner){
+                if (it){
+                    requireActivity().finish()
+                }
+            }
 
         }
 
