@@ -28,10 +28,7 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.signUpBtn.setOnClickListener {
-            val email = binding.emailEt.text.toString()
-            val password = binding.passwordEt.text.toString()
-            viewModel.signUp(email  , password)
-
+            viewModel.signUp(binding.emailEt.text.toString()  ,binding.passwordEt.text.toString())
             viewModel.finishWorkLiveData.observe(viewLifecycleOwner){
                 if (it){
                     requireActivity().finish()

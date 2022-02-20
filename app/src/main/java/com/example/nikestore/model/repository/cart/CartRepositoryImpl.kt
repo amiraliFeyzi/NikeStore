@@ -12,22 +12,26 @@ class CartRepositoryImpl (val cartRemoteDataSource: CartDataSource):CartReposito
 
     override suspend fun addToCart(productId: Int): AddToCartResponse{
         return cartRemoteDataSource.addToCart(productId)
-
     }
 
     override suspend fun get(): Flow<CartResponse> {
-        TODO("Not yet implemented")
+        return flow {
+            emit(cartRemoteDataSource.get())
+        }
     }
 
-    override suspend fun remove(cartItemId: Int): Flow<MessageResponse> {
-        TODO("Not yet implemented")
+    override suspend fun remove(cartItemId: Int): MessageResponse {
+        return cartRemoteDataSource.remove(cartItemId)
     }
 
-    override suspend fun changeCount(cartItemId: Int, count: Int): Flow<AddToCartResponse> {
-        TODO("Not yet implemented")
+    override suspend fun changeCount(cartItemId: Int, count: Int): AddToCartResponse {
+        return  cartRemoteDataSource.changeCount(cartItemId , count)
+
     }
 
     override suspend fun getCartItemsCount(): Flow<CartItemCount> {
-        TODO("Not yet implemented")
+        return flow {
+            emit(cartRemoteDataSource.getCartItemsCount())
+        }
     }
 }

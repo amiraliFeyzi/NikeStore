@@ -8,7 +8,7 @@ import com.example.nikestore.R
 import com.example.nikestore.base.NikeViewModel
 import com.example.nikestore.model.dataclass.Product
 import com.example.nikestore.model.repository.product.ProductRepository
-import com.example.nikestore.utils.EXTRA_KEY_PRODUCT_SORT
+import com.example.nikestore.utils.variables.EXTRA_KEY_PRODUCT_SORT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect

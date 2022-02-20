@@ -14,6 +14,10 @@ import com.example.nikestore.databinding.FragmentHomeBinding
 import com.example.nikestore.model.dataclass.Banner
 import com.example.nikestore.model.dataclass.Product
 import com.example.nikestore.utils.*
+import com.example.nikestore.utils.variables.EXTRA_KEY_DATA
+import com.example.nikestore.utils.variables.EXTRA_KEY_PRODUCT_SORT
+import com.example.nikestore.utils.variables.SORT_LATEST
+import com.example.nikestore.utils.variables.SORT_POPULAR
 import com.example.nikestore.view.detail.ProductDetailActivity
 import com.example.nikestore.view.home.adapter.BannerAdapter
 import com.example.nikestore.view.home.adapter.LatestProductListAdapter

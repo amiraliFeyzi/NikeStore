@@ -9,7 +9,7 @@ import com.example.nikestore.model.dataclass.Comment
 import com.example.nikestore.model.dataclass.Product
 import com.example.nikestore.model.repository.cart.CartRepository
 import com.example.nikestore.model.repository.comment.CommentRepository
-import com.example.nikestore.utils.EXTRA_KEY_DATA
+import com.example.nikestore.utils.variables.EXTRA_KEY_DATA
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch

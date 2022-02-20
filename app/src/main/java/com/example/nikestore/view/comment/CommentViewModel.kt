@@ -8,8 +8,8 @@ import com.example.nikestore.base.NikeViewModel
 import com.example.nikestore.model.dataclass.Comment
 import com.example.nikestore.model.dataclass.Product
 import com.example.nikestore.model.repository.comment.CommentRepository
-import com.example.nikestore.utils.EXTRA_KEY_DATA
-import com.example.nikestore.utils.EXTRA_KEY_DATA_ID
+import com.example.nikestore.utils.variables.EXTRA_KEY_DATA_ID
+
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect

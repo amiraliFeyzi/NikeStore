@@ -16,8 +16,8 @@ import com.example.nikestore.customview.scroll.ScrollState
 import com.example.nikestore.databinding.ActivityProductDetailBinding
 import com.example.nikestore.model.dataclass.Comment
 import com.example.nikestore.model.dataclass.Product
-import com.example.nikestore.utils.EXTRA_KEY_DATA_ID
 import com.example.nikestore.utils.formatPrice
+import com.example.nikestore.utils.variables.EXTRA_KEY_DATA_ID
 import com.example.nikestore.view.comment.CommentActivity
 import com.example.nikestore.view.comment.CommentAdapter
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,6 +1,7 @@
 package com.example.nikestore.di
 
 import com.example.nikestore.components.imageview.ImageLoading
+import com.example.nikestore.view.cart.CartAdapter
 import com.example.nikestore.view.home.adapter.LatestProductListAdapter
 import com.example.nikestore.view.home.adapter.BannerAdapter
 import com.example.nikestore.view.home.adapter.PopularProductListAdapter
@@ -20,4 +21,11 @@ object AdapterModule {
     fun provideProductListAdapter(imageLoading: ImageLoading):ProductListAdapter{
         return ProductListAdapter(imageLoading)
     }
+
+    @Singleton
+    @Provides
+    fun provideCartAdapter(imageLoading: ImageLoading):CartAdapter{
+        return CartAdapter(imageLoading)
+    }
+
 }

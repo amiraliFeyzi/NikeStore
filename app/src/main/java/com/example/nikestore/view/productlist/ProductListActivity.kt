@@ -11,9 +11,10 @@ import com.example.nikestore.R
 import com.example.nikestore.base.NikeActivity
 import com.example.nikestore.databinding.ActivityProductListBinding
 import com.example.nikestore.model.dataclass.Product
-import com.example.nikestore.utils.EXTRA_KEY_DATA
-import com.example.nikestore.utils.VIEW_TYPE_LARGE
-import com.example.nikestore.utils.VIEW_TYPE_SMALL
+
+import com.example.nikestore.utils.variables.EXTRA_KEY_DATA
+import com.example.nikestore.utils.variables.VIEW_TYPE_LARGE
+import com.example.nikestore.utils.variables.VIEW_TYPE_SMALL
 import com.example.nikestore.view.detail.ProductDetailActivity
 import com.example.nikestore.view.home.adapter.common.ProductEventListener
 import com.example.nikestore.view.productlist.adapter.ProductListAdapter

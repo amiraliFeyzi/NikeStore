@@ -15,8 +15,10 @@ class App:Application() {
     override fun onCreate() {
         super.onCreate()
 
+        //initial Timber
         Timber.plant(Timber.DebugTree())
 
+        //initial Fresco
         Fresco.initialize(this)
 
 

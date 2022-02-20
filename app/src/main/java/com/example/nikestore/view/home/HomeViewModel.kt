@@ -7,8 +7,8 @@ import com.example.nikestore.base.NikeViewModel
 import com.example.nikestore.model.dataclass.Banner
 import com.example.nikestore.model.dataclass.Product
 import com.example.nikestore.model.repository.product.ProductRepository
-import com.example.nikestore.utils.SORT_LATEST
-import com.example.nikestore.utils.SORT_POPULAR
+import com.example.nikestore.utils.variables.SORT_LATEST
+import com.example.nikestore.utils.variables.SORT_POPULAR
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect

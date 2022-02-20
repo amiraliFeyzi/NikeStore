@@ -15,19 +15,14 @@ class CartRemoteDataSource @Inject constructor(val apiService: ApiService) :Cart
         })
     }
 
-    override suspend fun get(): CartResponse {
-        TODO("Not yet implemented")
-    }
+    override suspend fun get(): CartResponse  = apiService.getCart()
+    override suspend fun remove(cartItemId: Int): MessageResponse  = apiService.removeItemFromCart(JsonObject().apply {
+        addProperty("cart_item_id" , cartItemId)
+    })
 
-    override suspend fun remove(cartItemId: Int): MessageResponse {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun changeCount(cartItemId: Int, count: Int): AddToCartResponse {
-        TODO("Not yet implemented")
-    }
-
-    override  suspend fun getCartItemsCount(): CartItemCount {
-        TODO("Not yet implemented")
-    }
+    override suspend fun changeCount(cartItemId: Int, count: Int): AddToCartResponse  = apiService.changeCount(JsonObject().apply {
+        addProperty("cart_item_id", cartItemId)
+        addProperty("count", count)
+    })
+    override  suspend fun getCartItemsCount(): CartItemCount  = apiService.getCartItemsCount()
 }

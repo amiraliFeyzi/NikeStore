@@ -10,7 +10,7 @@ interface CartRepository {
 
     suspend fun addToCart(productId: Int): AddToCartResponse
     suspend fun get(): Flow<CartResponse>
-    suspend fun remove(cartItemId: Int): Flow<MessageResponse>
-    suspend fun changeCount(cartItemId: Int, count: Int): Flow<AddToCartResponse>
+    suspend fun remove(cartItemId: Int): MessageResponse
+    suspend fun changeCount(cartItemId: Int, count: Int):AddToCartResponse
     suspend fun getCartItemsCount(): Flow<CartItemCount>
 }

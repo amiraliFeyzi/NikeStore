@@ -2,7 +2,7 @@ package com.example.nikestore.di
 
 import com.example.nikestore.model.`object`.TokenContainer
 import com.example.nikestore.model.apiService.ApiService
-import com.example.nikestore.utils.BASE_URL
+import com.example.nikestore.utils.variables.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -4,8 +4,9 @@ import com.example.nikestore.model.`object`.TokenContainer
 import com.example.nikestore.model.apiService.ApiService
 import com.example.nikestore.model.dataclass.TokenResponse
 import com.example.nikestore.model.datasource.user.UserLocalDataSource
-import com.example.nikestore.utils.CLIENT_ID
-import com.example.nikestore.utils.CLIENT_SECRET
+import com.example.nikestore.utils.variables.CLIENT_ID
+import com.example.nikestore.utils.variables.CLIENT_SECRET
+
 import com.google.gson.JsonObject
 import okhttp3.Authenticator
 import okhttp3.Request

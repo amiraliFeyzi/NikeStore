@@ -12,6 +12,8 @@ import com.example.nikestore.components.imageview.ImageLoading
 import com.example.nikestore.customview.imageview.NikeImageView
 import com.example.nikestore.model.dataclass.Product
 import com.example.nikestore.utils.*
+import com.example.nikestore.utils.variables.VIEW_TYPE_LARGE
+import com.example.nikestore.utils.variables.VIEW_TYPE_SMALL
 import com.example.nikestore.view.home.adapter.common.ProductEventListener
 import javax.inject.Inject
 
