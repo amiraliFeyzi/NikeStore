@@ -3,12 +3,15 @@ package com.example.nikestore.view.cart
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.nikestore.R
 import com.example.nikestore.base.NikeViewModel
 import com.example.nikestore.model.`object`.TokenContainer
 import com.example.nikestore.model.dataclass.CartItem
+import com.example.nikestore.model.dataclass.EmptyState
 import com.example.nikestore.model.dataclass.PurchaseDetail
 import com.example.nikestore.model.repository.cart.CartRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hilt_aggregated_deps._com_example_nikestore_di_RepositoryModule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
@@ -19,21 +22,29 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
 
     private val _cartItemsLiveData = MutableLiveData<List<CartItem>>()
     private val _purchaseDetailLiveData = MutableLiveData<PurchaseDetail>()
+    private val _emptyStateCart = MutableLiveData<EmptyState>()
 
     val cartItemsLiveData:LiveData<List<CartItem>> get() =  _cartItemsLiveData
     val purchaseDetailLiveData : LiveData<PurchaseDetail> get() =  _purchaseDetailLiveData
+    val emptyStateCart:LiveData<EmptyState> get() = _emptyStateCart
+
 
 
     private fun getCartItems(){
         if (!TokenContainer.token.isNullOrEmpty()){
             viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+                _emptyStateCart.postValue(EmptyState(false))
                 cartRepository.get().collect {
                     if (it.cart_items.isNotEmpty()){
                         _cartItemsLiveData.postValue(it.cart_items)
                         _purchaseDetailLiveData.postValue(PurchaseDetail(it.total_price ,it.shipping_cost , it.payable_price))
+                    }else{
+                        _emptyStateCart.postValue(EmptyState(true , R.string.cartEmptyState))
                     }
                 }
             }
+        }else{
+            _emptyStateCart.value = EmptyState(true , R.string.cartEmptyStateLoginRequired ,true )
         }
     }
 
@@ -44,6 +55,11 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
 
             }finally {
                 calculateAndPublishPurchaseDetail()
+                _cartItemsLiveData.value?.let {
+                    if (it.isEmpty()){
+                        _emptyStateCart.postValue(EmptyState(true , R.string.cartEmptyState))
+                    }
+                }
             }
 
         }

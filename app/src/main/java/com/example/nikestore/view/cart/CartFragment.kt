@@ -8,14 +8,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nikestore.R
 import com.example.nikestore.base.NikeFragment
 import com.example.nikestore.databinding.FragmentCartBinding
 import com.example.nikestore.model.dataclass.CartItem
 import com.example.nikestore.model.dataclass.PurchaseDetail
 import com.example.nikestore.utils.variables.EXTRA_KEY_DATA
+import com.example.nikestore.view.auth.AuthActivity
 
 import com.example.nikestore.view.detail.ProductDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.view_cart_empty_state.*
+import kotlinx.android.synthetic.main.view_cart_empty_state.view.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -56,6 +60,21 @@ class CartFragment : NikeFragment(),CartAdapter.CartItemViewCallbacks {
 
         viewModel.purchaseDetailLiveData.observe(viewLifecycleOwner){
             setUpPurchaseDetail(it)
+        }
+
+        viewModel.emptyStateCart.observe(viewLifecycleOwner){
+            if (it.mustShow){
+                val emptyState = showEmptyState(R.layout.view_cart_empty_state)
+                emptyState?.let{view->
+                    view.emptyStateMessageTv.text = getString(it.messageResId)
+                    view.emptyStateCtaBtn.visibility = if (it.mustShowCallToActionButton) View.VISIBLE else View.GONE
+                    view.emptyStateCtaBtn.setOnClickListener {
+                        startActivity(Intent(requireContext() , AuthActivity::class.java))
+                    }
+                }
+            }else{
+                emptyStateRootView?.visibility = View.GONE
+            }
         }
     }
 

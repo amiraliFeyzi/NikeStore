@@ -62,6 +62,21 @@ interface NikeView {
 
     }
 
+    fun showEmptyState(layoutRedId:Int):View?{
+        rootView?.let{
+            viewContext?.let { context ->
+                var emptyState  = it.findViewById<View>(R.id.emptyStateRootView)
+                if (emptyState == null){
+                    emptyState = LayoutInflater.from(context).inflate(layoutRedId , it , false)
+                    it.addView(emptyState)
+                }
+                emptyState.visibility = View.VISIBLE
+                return emptyState
+            }
+        }
+        return null
+    }
+
 
     fun showSnackBar(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
         rootView?.let {
