@@ -35,16 +35,7 @@ class ProductListActivity : NikeActivity() , ProductEventListener {
 
         observeData()
 
-        productListAdapter.productEventListener = this
 
-
-
-
-
-
-        binding.toolbarView.onBackButtonClickListener = View.OnClickListener {
-            finish()
-        }
 
     }
 
@@ -80,6 +71,11 @@ class ProductListActivity : NikeActivity() , ProductEventListener {
             }
         }
 
+        productListAdapter.productEventListener = this
+
+        binding.toolbarView.onBackButtonClickListener = View.OnClickListener {
+            finish()
+        }
         changeSort()
 
 

@@ -7,6 +7,7 @@ import com.example.nikestore.R
 import com.example.nikestore.base.NikeViewModel
 import com.example.nikestore.model.`object`.TokenContainer
 import com.example.nikestore.model.dataclass.CartItem
+import com.example.nikestore.model.dataclass.CartItemCount
 import com.example.nikestore.model.dataclass.EmptyState
 import com.example.nikestore.model.dataclass.PurchaseDetail
 import com.example.nikestore.model.repository.cart.CartRepository
@@ -16,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 @HiltViewModel
 class CartViewModel @Inject constructor(private val cartRepository: CartRepository) :NikeViewModel() {
@@ -60,7 +62,13 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
                         _emptyStateCart.postValue(EmptyState(true , R.string.cartEmptyState))
                     }
                 }
+                var cartItemCount =EventBus.getDefault().getStickyEvent(CartItemCount::class.java)
+                cartItemCount?.let {
+                    it.count -=cartItem.count
+                    EventBus.getDefault().postSticky(it)
+                }
             }
+
 
         }
     }
@@ -72,6 +80,11 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
 
            }finally {
                calculateAndPublishPurchaseDetail()
+               var cartItemCount =EventBus.getDefault().getStickyEvent(CartItemCount::class.java)
+               cartItemCount?.let {
+                   it.count += 1
+                   EventBus.getDefault().postSticky(it)
+               }
            }
 
 
@@ -87,7 +100,13 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
 
             }finally {
                 calculateAndPublishPurchaseDetail()
+                var cartItemCount =EventBus.getDefault().getStickyEvent(CartItemCount::class.java)
+                cartItemCount?.let {
+                    it.count -= 1
+                    EventBus.getDefault().postSticky(it)
+                }
             }
+
 
         }
 
