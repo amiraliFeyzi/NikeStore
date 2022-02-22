@@ -42,7 +42,11 @@ interface ApiService {
     @POST("auth/token")
     fun refreshToken(@Body jsonObject: JsonObject): Call<TokenResponse>
 
+    @POST("order/submit")
+    suspend fun submitOrder(@Body jsonObject: JsonObject):SubmitOrderResult
 
+    @GET("order/checkout")
+    suspend fun checkOut(@Query("order_id")orderId:Int):Checkout
 
 
 

@@ -9,10 +9,12 @@
         <entry key="..\:/Works File/NikeStore/app/src/main/res/drawable/ic_increase_cart_item_count.xml" value="0.121" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/drawable/ic_no_data.xml" value="0.1405" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_auth.xml" value="0.33" />
+        <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_check_out.xml" value="0.1675929884566054" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_comment.xml" value="0.1675929884566054" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_product_detail.xml" value="0.18" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_product_list.xml" value="0.33" />
+        <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_shipping.xml" value="0.18" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/content_comment.xml" value="0.16547066272688898" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/fragment_cart.xml" value="0.1675929884566054" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/fragment_home.xml" value="0.25" />

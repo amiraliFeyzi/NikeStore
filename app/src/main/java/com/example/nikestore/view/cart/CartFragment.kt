@@ -17,6 +17,7 @@ import com.example.nikestore.utils.variables.EXTRA_KEY_DATA
 import com.example.nikestore.view.auth.AuthActivity
 
 import com.example.nikestore.view.detail.ProductDetailActivity
+import com.example.nikestore.view.shipping.ShippingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.view_cart_empty_state.*
 import kotlinx.android.synthetic.main.view_cart_empty_state.view.*
@@ -76,8 +77,17 @@ class CartFragment : NikeFragment(),CartAdapter.CartItemViewCallbacks {
                 emptyStateRootView?.visibility = View.GONE
             }
         }
+
+        paymentProducts()
     }
 
+    fun paymentProducts(){
+        binding.payBtn.setOnClickListener {
+            startActivity(Intent(requireContext()  , ShippingActivity::class.java).apply {
+                putExtra(EXTRA_KEY_DATA , viewModel.purchaseDetailLiveData.value)
+            })
+        }
+    }
     private fun setUpCartItem(cartItems: List<CartItem>){
 
         cartAdapter.cartItemViewCallbacks = this
