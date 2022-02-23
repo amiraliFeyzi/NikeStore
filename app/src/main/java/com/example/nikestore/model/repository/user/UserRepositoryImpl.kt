@@ -24,7 +24,7 @@ class UserRepositoryImpl(private val userRemoteDataSource:UserDataSource ,privat
     }
 
     override suspend fun signUp(username: String, password: String):MessageResponse{
-        return userRemoteDataSource.signUp(username , password)
+        return userLocalDataSource.signUp(username , password)
     }
 
     override  fun loadToken() {
@@ -32,11 +32,12 @@ class UserRepositoryImpl(private val userRemoteDataSource:UserDataSource ,privat
     }
 
     override  fun getUserName(): String {
-        TODO("Not yet implemented")
+        return userLocalDataSource.getUsername()
     }
 
     override  fun signOut() {
-        TODO("Not yet implemented")
+        userLocalDataSource.signOut()
+        TokenContainer.update(null , null)
     }
 
 

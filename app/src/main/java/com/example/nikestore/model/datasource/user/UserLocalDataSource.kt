@@ -37,7 +37,7 @@ class UserLocalDataSource(private val sharedPreferences: SharedPreferences) :Use
     override  fun getUsername(): String  =sharedPreferences.getString("username", "") ?: ""
 
     override  fun signOut() {
-        return sharedPreferences.edit().apply {
+       sharedPreferences.edit().apply {
             clear()
         }.apply()
     }
