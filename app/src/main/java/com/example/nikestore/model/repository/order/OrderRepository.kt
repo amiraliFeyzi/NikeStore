@@ -1,6 +1,7 @@
 package com.example.nikestore.model.repository.order
 
 import com.example.nikestore.model.dataclass.Checkout
+import com.example.nikestore.model.dataclass.OrderHistoryItem
 import com.example.nikestore.model.dataclass.SubmitOrderResult
 import kotlinx.coroutines.flow.Flow
 
@@ -16,4 +17,7 @@ interface OrderRepository {
     ): Flow<SubmitOrderResult>
 
     suspend fun checkout(orderId: Int): Flow<Checkout>
+
+    fun listOrders():Flow<List<OrderHistoryItem>>
+
 }

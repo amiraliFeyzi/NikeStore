@@ -17,6 +17,7 @@
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_comment.xml" value="0.1675929884566054" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_favorite_product.xml" value="0.1675929884566054" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_order_history.xml" value="0.1675929884566054" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_product_detail.xml" value="0.18" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_product_list.xml" value="0.33" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/activity_shipping.xml" value="0.18" />
@@ -24,7 +25,7 @@
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/fragment_cart.xml" value="0.1675929884566054" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/fragment_log_in.xml" value="0.25" />
-        <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/fragment_profile.xml" value="0.67" />
+        <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/fragment_second.xml" value="0.16547066272688898" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/fragment_sign_up.xml" value="0.5" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/ic_no_data.xml" value="0.1675929884566054" />
@@ -32,6 +33,7 @@
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/item_cart.xml" value="0.25" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/item_comment.xml" value="0.1" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/item_favorite_product.xml" value="0.1675929884566054" />
+        <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/item_order_history.xml" value="0.1675929884566054" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/item_product.xml" value="0.1675929884566054" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/item_product_large.xml" value="0.1675929884566054" />
         <entry key="..\:/Works File/NikeStore/app/src/main/res/layout/item_product_small.xml" value="0.1675929884566054" />

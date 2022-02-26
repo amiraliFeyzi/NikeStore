@@ -1,6 +1,7 @@
 package com.example.nikestore.model.repository.order
 
 import com.example.nikestore.model.dataclass.Checkout
+import com.example.nikestore.model.dataclass.OrderHistoryItem
 import com.example.nikestore.model.dataclass.SubmitOrderResult
 import com.example.nikestore.model.datasource.order.OrderDataSource
 import kotlinx.coroutines.flow.Flow
@@ -26,5 +27,11 @@ class OrderRepositoryImpl (private val orderRemoteDataSource: OrderDataSource):O
             emit(orderRemoteDataSource.checkout(orderId))
         }
 
+    }
+
+    override fun listOrders(): Flow<List<OrderHistoryItem>> {
+        return flow {
+            emit(orderRemoteDataSource.listOrders())
+        }
     }
 }

@@ -48,6 +48,7 @@ interface ApiService {
     @GET("order/checkout")
     suspend fun checkOut(@Query("order_id")orderId:Int):Checkout
 
-
+    @GET("order/list")
+    fun orders():List<OrderHistoryItem>
 
 }

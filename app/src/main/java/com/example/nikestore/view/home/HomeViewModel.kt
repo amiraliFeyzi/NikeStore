@@ -54,7 +54,6 @@ class HomeViewModel @Inject constructor(private val productRepository: ProductRe
     }
 
     private fun getPopularProductList(){
-
         viewModelScope.launch (Dispatchers.IO){
             productRepository.getFavoriteProducts().collect {productFavorite->
                 productRepository.getProducts(SORT_POPULAR).collect { productServer->
@@ -67,7 +66,7 @@ class HomeViewModel @Inject constructor(private val productRepository: ProductRe
 
                         }
                     }
-                    _latestProductList.postValue(productServer)
+                    _popularProductList.postValue(productServer)
                 }
             }
         }

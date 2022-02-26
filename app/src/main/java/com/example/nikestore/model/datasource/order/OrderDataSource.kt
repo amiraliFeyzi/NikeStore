@@ -1,6 +1,7 @@
 package com.example.nikestore.model.datasource.order
 
 import com.example.nikestore.model.dataclass.Checkout
+import com.example.nikestore.model.dataclass.OrderHistoryItem
 import com.example.nikestore.model.dataclass.SubmitOrderResult
 
 interface OrderDataSource {
@@ -15,4 +16,6 @@ interface OrderDataSource {
     ): SubmitOrderResult
 
     suspend fun checkout(orderId: Int): Checkout
+
+    fun listOrders():List<OrderHistoryItem>
 }
