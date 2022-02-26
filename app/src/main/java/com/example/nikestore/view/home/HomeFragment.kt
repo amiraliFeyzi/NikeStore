@@ -40,6 +40,13 @@ class HomeFragment : NikeFragment() , ProductEventListener {
     lateinit var bannerAdapter: BannerAdapter
 
 
+    @Inject
+    lateinit var latestProductListAdapter: LatestProductListAdapter
+
+    @Inject
+    lateinit var popularProductListAdapter: PopularProductListAdapter
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,19 +76,19 @@ class HomeFragment : NikeFragment() , ProductEventListener {
             showListPopularProduct(it)
         }
 
-        showAllBtn()
+        showAllBtnClick()
     }
 
     private fun showListLatestProduct(product:List<Product>){
-        val latestProductListAdapter = LatestProductListAdapter(this , imageLoading)
         latestProductListAdapter.setProducts(product)
+        latestProductListAdapter.productEventListener = this
         binding.latestProductRv.layoutManager = LinearLayoutManager(requireContext() , RecyclerView.HORIZONTAL , false)
         binding.latestProductRv.adapter = latestProductListAdapter
     }
 
     private fun showListPopularProduct(product:List<Product>){
-        val popularProductListAdapter = PopularProductListAdapter(imageLoading , this)
         popularProductListAdapter.setProducts(product)
+        popularProductListAdapter.productEventListener  = this
         binding.popularRvProduct.layoutManager = LinearLayoutManager(requireContext() , RecyclerView.HORIZONTAL , false)
         binding.popularRvProduct.adapter = popularProductListAdapter
 
@@ -102,7 +109,7 @@ class HomeFragment : NikeFragment() , ProductEventListener {
         binding.bannerSliderViewPager.layoutParams = layoutParams
     }
 
-    private fun showAllBtn(){
+    private fun showAllBtnClick(){
         binding.viewListProductLatest.setOnClickListener {
             startActivity(Intent(requireContext() , ProductListActivity::class.java).apply {
                 putExtra(EXTRA_KEY_PRODUCT_SORT  , SORT_LATEST)
@@ -126,6 +133,10 @@ class HomeFragment : NikeFragment() , ProductEventListener {
         startActivity(Intent(requireContext() , ProductDetailActivity::class.java).apply {
             putExtra(EXTRA_KEY_DATA , product)
         })
+    }
+
+    override fun onFavoriteBtnClick(product: Product) {
+        viewModel.addProductToFavorite(product)
     }
 
 

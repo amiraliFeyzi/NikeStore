@@ -101,4 +101,8 @@ class ProductListActivity : NikeActivity() , ProductEventListener {
             putExtra(EXTRA_KEY_DATA , product)
         })
     }
+
+    override fun onFavoriteBtnClick(product: Product) {
+        viewModel.addProductToFavorite(product)
+    }
 }

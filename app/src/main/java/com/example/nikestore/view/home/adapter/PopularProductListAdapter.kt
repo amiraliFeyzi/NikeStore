@@ -4,6 +4,7 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nikestore.R
 import com.example.nikestore.components.imageview.ImageLoading
 import com.example.nikestore.databinding.ItemProductBinding
 import com.example.nikestore.model.dataclass.Product
@@ -14,10 +15,11 @@ import okhttp3.internal.format
 import java.util.ArrayList
 import javax.inject.Inject
 
-class PopularProductListAdapter (val imageLoading: ImageLoading , val productEventListener: ProductEventListener):RecyclerView.Adapter<PopularProductListAdapter.ViewHolder>() {
+class PopularProductListAdapter  @Inject constructor(val imageLoading: ImageLoading ,):RecyclerView.Adapter<PopularProductListAdapter.ViewHolder>() {
 
     private val productList =ArrayList<Product>()
 
+    var productEventListener: ProductEventListener? = null
 
 
     fun setProducts(
@@ -40,11 +42,21 @@ class PopularProductListAdapter (val imageLoading: ImageLoading , val productEve
             binding.root.implementSpringAnimationTrait()
 
             binding.root.setOnClickListener {
+                productEventListener?.onProductClick(product)
             }
 
-            binding.rootProduct.setOnClickListener {
-                productEventListener.onProductClick(product)
+            if (product.isFavorite){
+                binding.favoriteBtn.setImageResource(R.drawable.ic_favorite_fill)
+            }else{
+                binding.favoriteBtn.setImageResource(R.drawable.ic_favorites)
             }
+            binding.favoriteBtn.setOnClickListener {
+                productEventListener?.onFavoriteBtnClick(product)
+                product.isFavorite = !product.isFavorite
+                notifyItemChanged(adapterPosition)
+            }
+
+
         }
 
     }

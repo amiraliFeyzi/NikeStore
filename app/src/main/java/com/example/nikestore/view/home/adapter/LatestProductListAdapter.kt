@@ -4,6 +4,7 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nikestore.R
 import com.example.nikestore.components.imageview.ImageLoading
 import com.example.nikestore.databinding.ItemProductBinding
 import com.example.nikestore.model.dataclass.Product
@@ -12,11 +13,13 @@ import com.example.nikestore.utils.implementSpringAnimationTrait
 import com.example.nikestore.view.home.adapter.common.ProductEventListener
 import okhttp3.internal.format
 import java.util.ArrayList
+import javax.inject.Inject
 
-class LatestProductListAdapter(val productevent:ProductEventListener, val imageLoading: ImageLoading):RecyclerView.Adapter<LatestProductListAdapter.ViewHolder>() {
+class LatestProductListAdapter @Inject constructor( val imageLoading: ImageLoading):RecyclerView.Adapter<LatestProductListAdapter.ViewHolder>() {
 
     private val productList =ArrayList<Product>()
 
+    var productEventListener:ProductEventListener? = null
 
     fun setProducts(
         products: List<Product>,
@@ -38,10 +41,18 @@ class LatestProductListAdapter(val productevent:ProductEventListener, val imageL
             binding.root.implementSpringAnimationTrait()
 
             binding.root.setOnClickListener {
+                productEventListener?.onProductClick(product)
             }
 
-            binding.rootProduct.setOnClickListener {
-                productevent.onProductClick(product)
+            if (product.isFavorite){
+                binding.favoriteBtn.setImageResource(R.drawable.ic_favorite_fill)
+            }else{
+                binding.favoriteBtn.setImageResource(R.drawable.ic_favorites)
+            }
+            binding.favoriteBtn.setOnClickListener {
+                productEventListener?.onFavoriteBtnClick(product)
+                product.isFavorite = !product.isFavorite
+                notifyItemChanged(adapterPosition)
             }
 
         }

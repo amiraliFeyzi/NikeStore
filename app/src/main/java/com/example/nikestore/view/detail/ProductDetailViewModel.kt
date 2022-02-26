@@ -9,6 +9,7 @@ import com.example.nikestore.model.dataclass.Comment
 import com.example.nikestore.model.dataclass.Product
 import com.example.nikestore.model.repository.cart.CartRepository
 import com.example.nikestore.model.repository.comment.CommentRepository
+import com.example.nikestore.model.repository.product.ProductRepository
 import com.example.nikestore.utils.variables.EXTRA_KEY_DATA
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(private val savedStateHandle: SavedStateHandle, private val commentRepository: CommentRepository ,
-private val cartRepository: CartRepository):NikeViewModel() {
+private val cartRepository: CartRepository , private val productRepository: ProductRepository):NikeViewModel() {
 
     private val _productLiveData = MutableLiveData<Product>()
     private val _commentsLiveData = MutableLiveData<List<Comment>>()
@@ -46,6 +47,29 @@ private val cartRepository: CartRepository):NikeViewModel() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             cartRepository.addToCart(_productLiveData.value!!.id)
         }
+    }
+
+    fun addProductToFavorite(product: Product){
+        if(product.isFavorite){
+            viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+                try{
+                    productRepository.deleteFromFavorites(product)
+
+                }finally {
+                    product.isFavorite= false
+                }
+            }
+        }else{
+            viewModelScope.launch(Dispatchers.IO+ coroutineExceptionHandler) {
+                try {
+                    productRepository.addToFavorites(product)
+
+                }finally {
+                    product.isFavorite = true
+                }
+            }
+        }
+
     }
 
 }

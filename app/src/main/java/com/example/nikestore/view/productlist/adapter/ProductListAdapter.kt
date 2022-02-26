@@ -15,6 +15,7 @@ import com.example.nikestore.utils.*
 import com.example.nikestore.utils.variables.VIEW_TYPE_LARGE
 import com.example.nikestore.utils.variables.VIEW_TYPE_SMALL
 import com.example.nikestore.view.home.adapter.common.ProductEventListener
+import kotlinx.android.synthetic.main.item_product.view.*
 import javax.inject.Inject
 
 
@@ -58,6 +59,20 @@ class ProductListAdapter @Inject constructor(
             itemView.setOnClickListener {
                 productEventListener?.onProductClick(product)
             }
+
+
+            if (product.isFavorite){
+                itemView.favoriteBtn.setImageResource(R.drawable.ic_favorite_fill)
+            }else{
+                itemView.favoriteBtn.setImageResource(R.drawable.ic_favorites)
+            }
+
+            itemView.favoriteBtn.setOnClickListener {
+                productEventListener?.onFavoriteBtnClick(product)
+                product.isFavorite = !product.isFavorite
+                notifyItemChanged(adapterPosition)
+            }
+
 
 
         }

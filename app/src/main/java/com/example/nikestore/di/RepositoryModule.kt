@@ -2,6 +2,7 @@ package com.example.nikestore.di
 
 import android.content.SharedPreferences
 import com.example.nikestore.model.apiService.ApiService
+import com.example.nikestore.model.database.ProductDao
 import com.example.nikestore.model.datasource.cart.CartRemoteDataSource
 import com.example.nikestore.model.datasource.comment.CommentRemoteDataSource
 import com.example.nikestore.model.datasource.order.OrderRemoteDataSource
@@ -31,8 +32,8 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideProductRepository(apiService: ApiService):ProductRepository{
-        return ProductRepositoryImpl(ProductRemoteDataSource(apiService) , ProductLocalDataSource())
+    fun provideProductRepository(apiService: ApiService , productDao: ProductDao):ProductRepository{
+        return ProductRepositoryImpl(ProductRemoteDataSource(apiService) , ProductLocalDataSource(productDao))
     }
     @Singleton
     @Provides

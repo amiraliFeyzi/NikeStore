@@ -14,6 +14,9 @@
         android:theme="@style/Theme.NikeStore"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.favorite.FavoriteProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.checkout.CheckOutActivity"
             android:exported="true">
             <intent-filter>

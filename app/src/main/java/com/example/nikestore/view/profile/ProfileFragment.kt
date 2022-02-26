@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import com.example.nikestore.R
 import com.example.nikestore.databinding.FragmentProfileBinding
 import com.example.nikestore.view.auth.AuthActivity
+import com.example.nikestore.view.favorite.FavoriteProductActivity
+import com.example.nikestore.view.favorite.FavoriteProductAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +31,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.favoriteProductsBtn.setOnClickListener {
+            startActivity(Intent(requireContext() , FavoriteProductActivity::class.java))
+        }
     }
 
 

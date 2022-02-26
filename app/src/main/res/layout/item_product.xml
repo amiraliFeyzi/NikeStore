@@ -6,8 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingBottom="12dp"
     android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp"
-    android:id="@+id/root_product">
+    android:layout_marginEnd="4dp">
 
     <com.example.nikestore.customview.imageview.NikeImageView
         android:id="@+id/productIv"

@@ -24,6 +24,19 @@ object AdapterModule {
 
     @Singleton
     @Provides
+    fun provideLatestProductAdapter(imageLoading: ImageLoading):LatestProductListAdapter{
+        return LatestProductListAdapter(imageLoading)
+    }
+
+
+    @Singleton
+    @Provides
+    fun providePopularProductAdapter(imageLoading: ImageLoading):PopularProductListAdapter{
+        return PopularProductListAdapter(imageLoading)
+    }
+
+    @Singleton
+    @Provides
     fun provideCartAdapter(imageLoading: ImageLoading):CartAdapter{
         return CartAdapter(imageLoading)
     }

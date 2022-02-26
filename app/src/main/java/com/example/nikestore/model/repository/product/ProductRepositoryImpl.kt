@@ -6,6 +6,7 @@ import com.example.nikestore.model.datasource.product.ProductDataSource
 import com.example.nikestore.model.datasource.product.ProductLocalDataSource
 import com.example.nikestore.model.datasource.product.ProductRemoteDataSource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -16,17 +17,15 @@ class ProductRepositoryImpl @Inject constructor(private val productRemoteDataSou
         }
     }
 
-    override suspend fun getFavoriteProducts(): List<Product> {
-        TODO("Not yet implemented")
+    override suspend fun getFavoriteProducts(): Flow<List<Product>> {
+        return flow {
+            emit(productLocalDataSource.getFavoriteProducts())
+        }
     }
 
-    override suspend fun addToFavorites(product: Product) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun addToFavorites(product: Product) = productLocalDataSource.addToFavorites(product)
 
-    override suspend fun deleteFromFavorites(product: Product) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun deleteFromFavorites(product: Product)  = productLocalDataSource.deleteFromFavorites(product)
 
     override suspend fun getBanners(): Flow<List<Banner>>{
         return flow {

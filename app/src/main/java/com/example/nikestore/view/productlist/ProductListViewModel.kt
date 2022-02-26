@@ -48,4 +48,27 @@ class ProductListViewModel @Inject constructor(private val savedStateHandle: Sav
             }
         }
     }
+
+    fun addProductToFavorite(product: Product){
+        if(product.isFavorite){
+            viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+                try{
+                    productRepository.deleteFromFavorites(product)
+
+                }finally {
+                    product.isFavorite= false
+                }
+            }
+        }else{
+            viewModelScope.launch(Dispatchers.IO+ coroutineExceptionHandler) {
+                try {
+                    productRepository.addToFavorites(product)
+
+                }finally {
+                    product.isFavorite = true
+                }
+            }
+        }
+
+    }
 }

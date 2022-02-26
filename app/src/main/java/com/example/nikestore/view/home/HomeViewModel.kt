@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,35 +34,71 @@ class HomeViewModel @Inject constructor(private val productRepository: ProductRe
         getPopularProductList()
     }
     private  fun getLatestProductList(){
-        progressBarLiveData.value =true
 
         viewModelScope.launch (Dispatchers.IO){
-            productRepository.getProducts(SORT_LATEST)
-                .onCompletion { progressBarLiveData.postValue(false) }
-                .collect {
-                    _latestProductList.postValue(it)
-            }
+            productRepository.getFavoriteProducts().collect {productFavorite->
+                productRepository.getProducts(SORT_LATEST).collect {productServer->
+                    val favoriteIds = productFavorite.map {
+                        it.id
+                    }
+                    productServer.forEach {product->
+                        if (favoriteIds.contains(product.id)){
+                            product.isFavorite = true
 
+                        }
+                    }
+                    _latestProductList.postValue(productServer)
+                }
+            }
         }
     }
 
     private fun getPopularProductList(){
-        progressBarLiveData.value =true
 
         viewModelScope.launch (Dispatchers.IO){
-            productRepository.getProducts(SORT_POPULAR)
-                .onCompletion { progressBarLiveData.postValue(false) }
-                .collect {
-                    _popularProductList.postValue(it)
+            productRepository.getFavoriteProducts().collect {productFavorite->
+                productRepository.getProducts(SORT_POPULAR).collect { productServer->
+                    val favoriteIds = productFavorite.map {
+                        it.id
+                    }
+                    productServer.forEach {product->
+                        if (favoriteIds.contains(product.id)){
+                            product.isFavorite = true
 
+                        }
+                    }
+                    _latestProductList.postValue(productServer)
                 }
-
+            }
         }
     }
     private fun getBanners(){
         viewModelScope.launch(Dispatchers.IO) {
             productRepository.getBanners().collect {
                 _bannersList.postValue(it)
+            }
+        }
+
+    }
+
+    fun addProductToFavorite(product: Product){
+        if(product.isFavorite){
+            viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+                try{
+                    productRepository.deleteFromFavorites(product)
+
+                }finally {
+                    product.isFavorite= false
+                }
+            }
+        }else{
+            viewModelScope.launch(Dispatchers.IO+ coroutineExceptionHandler) {
+                try {
+                    productRepository.addToFavorites(product)
+
+                }finally {
+                    product.isFavorite = true
+                }
             }
         }
 

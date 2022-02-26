@@ -50,11 +50,9 @@ class ProductDetailActivity : NikeActivity() {
             setUpUi(it)
         }
 
-
         viewModel.commentsLiveData.observe(this){
             setCommentsList(it)
         }
-
 
     }
 
@@ -68,7 +66,6 @@ class ProductDetailActivity : NikeActivity() {
 
         setAnimations()
 
-
         binding.addToCartBtn.setOnClickListener {
             viewModel.onAddToCartBtn()
             showSnackBar(getString(R.string.success_addToCart))
@@ -76,6 +73,15 @@ class ProductDetailActivity : NikeActivity() {
 
         binding.backBtn.setOnClickListener {
             finish()
+        }
+
+        if (product.isFavorite){
+            binding.favoriteBtn.setImageResource(R.drawable.ic_favorite_fill)
+        }else{
+            binding.favoriteBtn.setImageResource(R.drawable.ic_favorites)
+        }
+        binding.favoriteBtn.setOnClickListener {
+            viewModel.addProductToFavorite(product)
         }
 
     }

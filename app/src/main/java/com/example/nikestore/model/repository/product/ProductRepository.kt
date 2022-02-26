@@ -8,7 +8,7 @@ interface ProductRepository {
 
     suspend fun getProducts(sort:String): Flow<List<Product>>
 
-    suspend fun getFavoriteProducts(): List<Product>
+    suspend fun getFavoriteProducts(): Flow<List<Product>>
 
     suspend fun addToFavorites(product: Product)
 
