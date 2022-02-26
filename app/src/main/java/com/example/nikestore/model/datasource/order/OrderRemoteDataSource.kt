@@ -30,5 +30,5 @@ class OrderRemoteDataSource (private val apiService: ApiService):OrderDataSource
        return apiService.checkOut(orderId)
     }
 
-    override fun listOrders(): List<OrderHistoryItem>  = apiService.orders()
+    override suspend fun listOrders(): List<OrderHistoryItem>  = apiService.orders()
 }

@@ -17,5 +17,5 @@ interface OrderDataSource {
 
     suspend fun checkout(orderId: Int): Checkout
 
-    fun listOrders():List<OrderHistoryItem>
+    suspend fun listOrders():List<OrderHistoryItem>
 }

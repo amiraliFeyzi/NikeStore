@@ -9,6 +9,10 @@ class ProductLocalDataSource (private val productDao: ProductDao):ProductDataSou
         TODO("Not yet implemented")
     }
 
+    override suspend fun searchProduct(name: String): List<Product> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getFavoriteProducts(): List<Product> {
        return productDao.getFavoriteProducts()
     }

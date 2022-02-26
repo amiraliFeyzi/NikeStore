@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.home.HomeFragment">
+    tools:context=".view.home.HomeFragment"
+    >
 
 
 
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/et_search"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginStart="16dp"
@@ -48,9 +50,18 @@
                 app:srcCompat="@drawable/ic_search" />
         </FrameLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:id="@+id/searchRv" />
+
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/frameViewPager">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/bannerSliderViewPager"
@@ -78,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="16dp"
+                android:id="@+id/frame_text"
                 android:paddingEnd="16dp">
                 
                 <TextView
@@ -111,6 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="16dp"
+                android:id="@+id/frame_text2"
                 android:paddingEnd="16dp">
 
                 <TextView
@@ -143,5 +156,7 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3,6 +3,7 @@ package com.example.nikestore.view.checkout
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.example.nikestore.databinding.ActivityCheckOutBinding
 import com.example.nikestore.utils.formatPrice
@@ -16,7 +17,6 @@ class CheckOutActivity : AppCompatActivity() {
     private lateinit var binding:ActivityCheckOutBinding
 
     private val viewModel:CheckOutViewModel by viewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +39,11 @@ class CheckOutActivity : AppCompatActivity() {
             purchaseStatusTv.text = if (it.purchase_success) "خرید با موفقیت انجام شد" else "خرید ناموفق بود"
 
         }
+
+        binding.toolbarView.onBackButtonClickListener =View.OnClickListener {
+            finish()
+        }
+
 
     }
 

@@ -2,10 +2,13 @@ package com.example.nikestore.view.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nikestore.base.NikeFragment
@@ -22,6 +25,7 @@ import com.example.nikestore.view.detail.ProductDetailActivity
 import com.example.nikestore.view.home.adapter.BannerAdapter
 import com.example.nikestore.view.home.adapter.LatestProductListAdapter
 import com.example.nikestore.view.home.adapter.PopularProductListAdapter
+import com.example.nikestore.view.home.adapter.SearchAdapter
 import com.example.nikestore.view.home.adapter.common.ProductEventListener
 import com.example.nikestore.view.productlist.ProductListActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,6 +65,7 @@ class HomeFragment : NikeFragment() , ProductEventListener {
         super.onViewCreated(view, savedInstanceState)
 
         observeData()
+
     }
 
     private fun observeData(){
@@ -76,7 +81,44 @@ class HomeFragment : NikeFragment() , ProductEventListener {
             showListPopularProduct(it)
         }
 
+        searchProduct()
         showAllBtnClick()
+    }
+
+    private fun searchProduct(){
+        binding.searchRv.layoutManager = GridLayoutManager(requireContext() , 2)
+        val searchAdapter = SearchAdapter(imageLoading)
+        searchAdapter.productEventListener = this
+
+        binding.etSearch.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                changeVisibilityForSearch()
+                viewModel.searchProduct(p0.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+
+        viewModel.responseSearchProduct.observe(viewLifecycleOwner){
+            searchAdapter.setProducts(it)
+            binding.searchRv.adapter = searchAdapter
+        }
+    }
+
+    private fun changeVisibilityForSearch(){
+        binding.frameViewPager.visibility = View.GONE
+        binding.frameText.visibility = View.GONE
+        binding.frameText2.visibility = View.GONE
+        binding.latestProductRv.visibility = View.GONE
+        binding.popularRvProduct.visibility = View.GONE
+        binding.searchRv.visibility = View.VISIBLE
     }
 
     private fun showListLatestProduct(product:List<Product>){
@@ -93,6 +135,8 @@ class HomeFragment : NikeFragment() , ProductEventListener {
         binding.popularRvProduct.adapter = popularProductListAdapter
 
     }
+
+
 
     private fun showSlider(banners:List<Banner>){
         binding.bannerSliderViewPager.adapter  = bannerAdapter

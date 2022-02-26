@@ -23,10 +23,12 @@ class HomeViewModel @Inject constructor(private val productRepository: ProductRe
     private val _latestProductList = MutableLiveData<List<Product>>()
     private val _bannersList = MutableLiveData<List<Banner>>()
     private val _popularProductList = MutableLiveData<List<Product>>()
+    private val _responseSearchProduct= MutableLiveData<List<Product>>()
 
     val latestProductList:LiveData<List<Product>> get() =  _latestProductList
     val bannersList:LiveData<List<Banner>> get() = _bannersList
     val popularProductList:LiveData<List<Product>> get() = _popularProductList
+    val responseSearchProduct:LiveData<List<Product>> get() = _responseSearchProduct
 
     init {
         getLatestProductList()
@@ -101,6 +103,14 @@ class HomeViewModel @Inject constructor(private val productRepository: ProductRe
             }
         }
 
+    }
+
+    fun searchProduct(nameProduct:String){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            productRepository.searchProduct(nameProduct).collect {
+                _responseSearchProduct.postValue(it)
+            }
+        }
     }
 
 }

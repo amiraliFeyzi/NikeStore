@@ -29,7 +29,7 @@ class OrderRepositoryImpl (private val orderRemoteDataSource: OrderDataSource):O
 
     }
 
-    override fun listOrders(): Flow<List<OrderHistoryItem>> {
+    override suspend fun listOrders(): Flow<List<OrderHistoryItem>> {
         return flow {
             emit(orderRemoteDataSource.listOrders())
         }

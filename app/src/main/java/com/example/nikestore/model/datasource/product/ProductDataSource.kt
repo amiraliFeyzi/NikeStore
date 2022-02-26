@@ -6,6 +6,8 @@ import com.example.nikestore.model.dataclass.Product
 interface ProductDataSource {
     suspend fun getProducts(sort:String): List<Product>
 
+    suspend fun searchProduct(name:String):List<Product>
+
     suspend fun getFavoriteProducts(): List<Product>
 
     suspend fun addToFavorites(product: Product)

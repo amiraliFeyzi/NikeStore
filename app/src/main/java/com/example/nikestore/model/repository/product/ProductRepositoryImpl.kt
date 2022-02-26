@@ -17,6 +17,12 @@ class ProductRepositoryImpl @Inject constructor(private val productRemoteDataSou
         }
     }
 
+    override suspend fun searchProduct(name: String): Flow<List<Product>> {
+        return flow {
+            emit(productRemoteDataSource.searchProduct(name))
+        }
+    }
+
     override suspend fun getFavoriteProducts(): Flow<List<Product>> {
         return flow {
             emit(productLocalDataSource.getFavoriteProducts())

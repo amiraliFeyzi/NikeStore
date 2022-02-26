@@ -1,4 +1,4 @@
-package com.example.nikestore.view.productlist.adapter
+package com.example.nikestore.view.home.adapter
 
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -11,38 +11,29 @@ import com.example.nikestore.R
 import com.example.nikestore.components.imageview.ImageLoading
 import com.example.nikestore.customview.imageview.NikeImageView
 import com.example.nikestore.model.dataclass.Product
-import com.example.nikestore.utils.*
+import com.example.nikestore.utils.formatPrice
+import com.example.nikestore.utils.implementSpringAnimationTrait
 import com.example.nikestore.utils.variables.VIEW_TYPE_LARGE
 import com.example.nikestore.utils.variables.VIEW_TYPE_SMALL
 import com.example.nikestore.view.home.adapter.common.ProductEventListener
+import com.example.nikestore.view.productlist.adapter.ProductListAdapter
 import kotlinx.android.synthetic.main.item_product.view.*
 import javax.inject.Inject
 
-
-class ProductListAdapter @Inject constructor(
+class SearchAdapter @Inject constructor(
     val imageLoading: ImageLoading
-) :
-    RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     var productEventListener: ProductEventListener? = null
 
-    private var viewType: Int = VIEW_TYPE_SMALL
-
-    fun setViewType(viewType: Int,) {
-        this.viewType = viewType
-        notifyDataSetChanged()
-    }
     var products = ArrayList<Product>()
-
     fun setProducts(products:List<Product>){
         this.products.clear()
         this.products.addAll(products)
         notifyDataSetChanged()
     }
 
-    fun getViewTpe():Int{
-        return viewType
-    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productIv: NikeImageView = itemView.findViewById(R.id.productIv)
         val titleTv: TextView = itemView.findViewById(R.id.productTitleTv)
@@ -56,6 +47,7 @@ class ProductListAdapter @Inject constructor(
             previousPriceTv.text = formatPrice(product.previous_price)
             previousPriceTv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             itemView.implementSpringAnimationTrait()
+
             itemView.setOnClickListener {
                 productEventListener?.onProductClick(product)
             }
@@ -64,7 +56,7 @@ class ProductListAdapter @Inject constructor(
             if (product.isFavorite){
                 favoriteBtn.setImageResource(R.drawable.ic_favorite_fill)
             }else{
-                favoriteBtn.setImageResource(R.drawable.ic_favorites)
+                itemView.favoriteBtn.setImageResource(R.drawable.ic_favorites)
             }
 
             favoriteBtn.setOnClickListener {
@@ -78,23 +70,13 @@ class ProductListAdapter @Inject constructor(
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return viewType
-    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutResId = when (viewType) {
-            VIEW_TYPE_SMALL -> R.layout.item_product_small
-            VIEW_TYPE_LARGE -> R.layout.item_product_large
-            else -> throw IllegalStateException("viewType is not valid")
-        }
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
-        )
+       return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_product , parent , false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.bindProduct(products[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =  holder.bindProduct(products[position])
 
     override fun getItemCount(): Int = products.size
 

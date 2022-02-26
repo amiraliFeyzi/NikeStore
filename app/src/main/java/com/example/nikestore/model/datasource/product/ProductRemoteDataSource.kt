@@ -10,6 +10,10 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) : 
        return apiService.getProduct(sort)
     }
 
+    override suspend fun searchProduct(name: String): List<Product> {
+        return apiService.searchProduct(name)
+    }
+
     override suspend fun getFavoriteProducts(): List<Product> {
         TODO("Not yet implemented")
     }

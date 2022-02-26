@@ -18,6 +18,6 @@ interface OrderRepository {
 
     suspend fun checkout(orderId: Int): Flow<Checkout>
 
-    fun listOrders():Flow<List<OrderHistoryItem>>
+    suspend fun listOrders():Flow<List<OrderHistoryItem>>
 
 }

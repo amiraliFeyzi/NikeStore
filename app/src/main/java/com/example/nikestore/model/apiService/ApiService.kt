@@ -12,6 +12,9 @@ interface ApiService {
     @GET("product/list")
     suspend fun getProduct(@Query("sort")sort:String):List<Product>
 
+    @GET("product/search")
+    suspend fun searchProduct(@Query("q")nameProduct:String):List<Product>
+
     @GET("banner/slider")
     suspend fun getBanners():List<Banner>
 
@@ -49,6 +52,6 @@ interface ApiService {
     suspend fun checkOut(@Query("order_id")orderId:Int):Checkout
 
     @GET("order/list")
-    fun orders():List<OrderHistoryItem>
+    suspend fun orders():List<OrderHistoryItem>
 
 }
