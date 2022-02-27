@@ -13,4 +13,6 @@ class CommentRepositoryImpl @Inject constructor(val commentRemoteDataSource: Com
            emit(commentRemoteDataSource.getComments(productId))
        }
     }
+
+    override suspend fun addComment(productId: String, title: String, content: String)  = commentRemoteDataSource.addComment(productId , title , content)
 }

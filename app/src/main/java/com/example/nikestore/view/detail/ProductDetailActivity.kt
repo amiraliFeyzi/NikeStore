@@ -20,6 +20,7 @@ import com.example.nikestore.utils.formatPrice
 import com.example.nikestore.utils.variables.EXTRA_KEY_DATA_ID
 import com.example.nikestore.view.comment.CommentActivity
 import com.example.nikestore.view.comment.CommentAdapter
+import com.example.nikestore.view.comment.add.AddCommentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_product_detail.*
 import javax.inject.Inject
@@ -82,6 +83,12 @@ class ProductDetailActivity : NikeActivity() {
         }
         binding.favoriteBtn.setOnClickListener {
             viewModel.addProductToFavorite(product)
+        }
+
+        binding.addCommentBtn.setOnClickListener {
+            startActivity(Intent(this , AddCommentActivity::class.java).apply {
+                putExtra(EXTRA_KEY_DATA_ID , product.id)
+            })
         }
 
     }

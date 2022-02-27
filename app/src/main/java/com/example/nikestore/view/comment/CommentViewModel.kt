@@ -23,10 +23,9 @@ class CommentViewModel @Inject constructor(
     private val _productIdLiveData = MutableLiveData<Int>()
     private val _commentsLiveData = MutableLiveData<List<Comment>>()
 
-    val productLiveData:LiveData<Int> get() = _productIdLiveData
     val commentsLiveData:LiveData<List<Comment>> get() = _commentsLiveData
 
-    fun getProductId():Int{
+    private fun getProductId():Int{
         val response = savedStateHandle.get<Product>(EXTRA_KEY_DATA_ID)
         _productIdLiveData.postValue(response!!.id)
         return response.id
@@ -41,5 +40,11 @@ class CommentViewModel @Inject constructor(
     }
 
 
+    fun addComment(title:String , content:String){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            commentRepository.addComment(getProductId().toString() , title , content)
+
+        }
+    }
 
 }

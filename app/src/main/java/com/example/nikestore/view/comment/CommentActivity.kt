@@ -1,5 +1,6 @@
 package com.example.nikestore.view.comment
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import com.example.nikestore.R
 import com.example.nikestore.base.NikeActivity
 import com.example.nikestore.databinding.ActivityCommentBinding
 import com.example.nikestore.model.dataclass.Comment
+import com.example.nikestore.view.comment.add.AddCommentActivity
 import com.example.nikestore.view.detail.ProductDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,6 +46,10 @@ class CommentActivity : NikeActivity() {
         commentAdapter.setData(comments)
         binding.commentsRv.layoutManager = LinearLayoutManager(this , RecyclerView.VERTICAL ,false)
         binding.commentsRv.adapter = commentAdapter
+
+        binding.addCommentFab.setOnClickListener {
+            startActivity(Intent(this , AddCommentActivity::class.java))
+        }
 
     }
 }

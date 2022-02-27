@@ -6,4 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface CommentRepository {
 
     suspend fun getComments(productId:String):Flow<List<Comment>>
+
+    suspend fun addComment(productId: String , title:String , content:String)
+
 }

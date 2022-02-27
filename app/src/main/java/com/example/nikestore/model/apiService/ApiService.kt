@@ -21,6 +21,9 @@ interface ApiService {
     @GET("comment/list")
     suspend fun getComments(@Query("product_id") productId: Int): List<Comment>
 
+    @POST("comment/add")
+    suspend fun addComment(@Body jsonObject: JsonObject)
+
     @POST("cart/add")
     suspend fun addToCart(@Body jsonObject: JsonObject): AddToCartResponse
 
