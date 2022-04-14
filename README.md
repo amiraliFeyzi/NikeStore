@@ -1,7 +1,7 @@
 # NikeStore
 Nike app is a shoe store app. This app developed with Kotlin and MVVM architecture and application that works with Real rest API.You can install the app and Signup into it
 
-## This Project Use:
+## This Project Use
 
 -MVVM Architecture
 
